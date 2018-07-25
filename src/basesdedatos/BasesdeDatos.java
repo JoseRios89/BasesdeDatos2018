@@ -12,7 +12,7 @@ package basesdedatos;
 public class BasesdeDatos {
 
     /**
-     * @param args the command line arguments
+     *Prueba de GIT @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
