@@ -97,6 +97,15 @@ public class Login extends javax.swing.JFrame {
         Principal menuPrincipal = new Principal();
        menuPrincipal.setVisible(rootPaneCheckingEnabled);
        
+       menuPrincipal.Txtnombre.setText(jTextPane1.getText());
+       
+       
+       
+       
+       
+       
+       
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

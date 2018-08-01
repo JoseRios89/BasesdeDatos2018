@@ -1,5 +1,5 @@
 
-package sistema;
+
 
 import Vistas.Login;
 import Vistas.Principal;
