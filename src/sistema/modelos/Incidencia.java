@@ -13,11 +13,13 @@ public class Incidencia {
     private String codigoIncidencia;
     private String descripcion;
     private int precioUnitario;
+    private String codigoTiquete;
 
-    public Incidencia(String codigoIncidencia, String descripcion, int precioUnitario) {
+    public Incidencia(String codigoIncidencia, String descripcion, int precioUnitario, String codigoTiquete) {
         this.codigoIncidencia = codigoIncidencia;
         this.descripcion = descripcion;
         this.precioUnitario = precioUnitario;
+        this.codigoTiquete = codigoTiquete;
     }
 
     public String getCodigoIncidencia() {
@@ -43,4 +45,14 @@ public class Incidencia {
     public void setPrecioUnitario(int precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
+
+    public String getCodigoTiquete() {
+        return codigoTiquete;
+    }
+
+    public void setCodigoTiquete(String codigoTiquete) {
+        this.codigoTiquete = codigoTiquete;
+    }
+    
+    
 }

@@ -12,21 +12,21 @@ import java.util.Date;
  */
 public class Tiquete {
     private String codigoTiquete;
-
-
     private Date fechaCreacion;
     private Date fechaSolucion;
     private String descripcion;
     private String solucion;
     private String estado;
+    private String codigoCliente;
 
-    public Tiquete(String codigoTiquete, Date fechaCreacion, Date fechaSolucion, String descripcion, String solucion, String estado) {
+    public Tiquete(String codigoTiquete, Date fechaCreacion, Date fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente) {
         this.codigoTiquete = codigoTiquete;
         this.fechaCreacion = fechaCreacion;
         this.fechaSolucion = fechaSolucion;
         this.descripcion = descripcion;
         this.solucion = solucion;
         this.estado = estado;
+        this.codigoCliente = codigoCliente;
     }
 
     public Date getFechaCreacion() {
@@ -75,5 +75,13 @@ public class Tiquete {
 
     public void setCodigoTiquete(String codigoTiquete) {
         this.codigoTiquete = codigoTiquete;
+    }
+
+    public String getCodigoCliente() {
+        return codigoCliente;
+    }
+
+    public void setCodigoCliente(String codigoCliente) {
+        this.codigoCliente = codigoCliente;
     }
 }

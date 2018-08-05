@@ -13,10 +13,12 @@ public class Departamento {
     /* VARIABLES */
     private String nombre;
     private String codigoDepartamento;
+    private String codigoArea;
 
     /* CONSTRUCTOR */
-    public Departamento(String codigoDepartamento, String nombre) {
+    public Departamento(String codigoDepartamento, String nombre, String codigoArea) {
         this.codigoDepartamento = codigoDepartamento;
+        this.codigoArea = codigoArea;
         this.nombre = nombre;
     }
 
@@ -38,4 +40,11 @@ public class Departamento {
         this.codigoDepartamento = codigoDepartamento;
     }
 
+    public String getCodigoArea() {
+        return codigoArea;
+    }
+
+    public void setCodigoArea(String codigoArea) {
+        this.codigoArea = codigoArea;
+    }
 }

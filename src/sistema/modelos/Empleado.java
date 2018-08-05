@@ -13,11 +13,13 @@ public class Empleado {
     private String nombre;
     private String apellido;
     private String codigoEmpleado;
+    private String codigoDepartamento;
 
-    public Empleado(String nombre, String apellido, String codigoEmpleado) {
+    public Empleado(String nombre, String apellido, String codigoEmpleado, String codigoDepartamento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.codigoEmpleado = codigoEmpleado;
+        this.codigoDepartamento = codigoDepartamento;
     }
 
     public String getNombre() {
@@ -43,7 +45,12 @@ public class Empleado {
     public void setCodigoEmpleado(String codigoEmpleado) {
         this.codigoEmpleado = codigoEmpleado;
     }
-    
-    
-    
+
+    public String getCodigoDepartamento() {
+        return codigoDepartamento;
+    }
+
+    public void setCodigoDepartamento(String codigoDepartamento) {
+        this.codigoDepartamento = codigoDepartamento;
+    }    
 }
