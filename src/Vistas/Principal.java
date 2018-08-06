@@ -5,6 +5,16 @@
  */
 package Vistas;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Daniel
@@ -116,6 +126,11 @@ public class Principal extends javax.swing.JFrame {
         cb_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Seguimiento por E-Mail");
 
@@ -370,8 +385,28 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_tipoActionPerformed
 
     private void btn_enviarMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarMensajeActionPerformed
-        // TODO add your handling code here:
+        try {      
+            Connection conexion = null;
+            PreparedStatement stmt = null;
+            String connectionUrl = "jdbc:sqlserver://;database=sistema_tiquetes;integratedSecurity=true;";
+            conexion = DriverManager.getConnection(connectionUrl);
+            JOptionPane.showMessageDialog(null,"Conectado.");          
+
+            if (conexion != null) {
+              stmt.close();
+              conexion.close();
+              JOptionPane.showMessageDialog(null,"Desconectado");
+            }           
+          } 
+          catch (SQLException ex) 
+          {
+            JOptionPane.showMessageDialog(null,"Error.");
+          }
     }//GEN-LAST:event_btn_enviarMensajeActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
 
     /**
      * @param args the command line arguments
