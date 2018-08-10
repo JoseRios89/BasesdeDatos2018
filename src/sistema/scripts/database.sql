@@ -57,6 +57,11 @@ CREATE TABLE sistema_tiquetes.tbl_incidencia (
     descripcion VARCHAR(100),
     precioUnitario INT,
     codigoTiquete VARCHAR(10),
+    tipo VARCHAR (20);
+    categoria VARCHAR(20);
+    urgencia VARCHAR (10);
+    seguimiento VARCHAR (10);
+    titulo VARCHAR (50);
     PRIMARY KEY (codigoIncidencia),
     FOREIGN KEY (codigoTiquete) REFERENCES tbl_tiquete(codigoTiquete)
 );
