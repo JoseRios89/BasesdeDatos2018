@@ -5,6 +5,8 @@
  */
 package sistema.modelos;
 
+import javax.swing.JComboBox;
+
 /**
  *
  * @author jramos
@@ -32,6 +34,10 @@ public class Incidencia {
         this.urgencia = urgencia;
         this.seguimiento = seguimiento;
         this.titulo = titulo;
+    }
+
+    public Incidencia() {
+        
     }
 
     public String getCodigoIncidencia() {
@@ -104,5 +110,7 @@ public class Incidencia {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }  
+
+ 
     
 }
