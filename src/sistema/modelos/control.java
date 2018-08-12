@@ -16,7 +16,7 @@ public class control {
         
         
         
-        
+      
                 try {      
             Connection conexion = null;
             PreparedStatement stmt = null;
