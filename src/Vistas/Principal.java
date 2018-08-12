@@ -380,6 +380,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Salir");
+        if(jMenu3.isSelected()){
+
+            System.exit(0);
+        }
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);

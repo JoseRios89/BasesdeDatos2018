@@ -18,6 +18,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(jMenu3.isSelected()){&#xa;&#xa;System.exit(0);&#xa;}"/>
+          </AuxValues>
         </Menu>
       </SubComponents>
     </Menu>
