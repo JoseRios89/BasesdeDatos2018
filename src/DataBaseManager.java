@@ -1,7 +1,8 @@
-
+import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.reflect.Method;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,7 +27,7 @@ public class DataBaseManager {
         String nombreTabla = new StringBuilder().append("tbl_").
           append(objeto.getClass().getSimpleName().toLowerCase()).toString();
         String atributosObjeto = this.lineaDesdeArray(this.obtenerNombresDeAtributos(objeto));
-        String valoresObjeto = "'Tecnica', '1'"; // Por definir metodo para extraer los datos.
+        String valoresObjeto = this.lineaDesdeArray(this.obtenerValoresDeAtributos(objeto));
 
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ").append(nombreTabla);
@@ -42,7 +43,7 @@ public class DataBaseManager {
         String nombreTabla = new StringBuilder().append("tbl_").
           append(nombreClase.toLowerCase()).toString();
         String llavePrimaria = new StringBuilder().append("codigo").append(nombreClase).toString();
-        String valorLlavePrimaria = "1"; // Por definir. 
+        String valorLlavePrimaria = this.evaluarLlavePrimaria(objeto, llavePrimaria);
 
         StringBuilder query = new StringBuilder();
         query.append("DELETE FROM ").append(nombreTabla);
@@ -59,8 +60,8 @@ public class DataBaseManager {
           append(nombreClase.toLowerCase()).toString();
         String atributosObjeto = this.lineaDesdeArray(this.obtenerNombresDeAtributos(objeto));
         String llavePrimaria = new StringBuilder().append("codigo").append(nombreClase).toString();
-        String valoresObjeto = "nombre = 'Informatica', codigoArea = '1'"; // Por definir metodo para extraer los datos.
-        String valorLlavePrimaria = "1"; // Por definir.
+        String valoresObjeto = this.lineaDesdeArray(this.obtenerValoresDeAtributos(objeto));
+        String valorLlavePrimaria = this.evaluarLlavePrimaria(objeto, llavePrimaria);
 
         StringBuilder query = new StringBuilder();
         query.append("UPDATE ").append(nombreTabla);
@@ -86,9 +87,23 @@ public class DataBaseManager {
         return atributosDeClase;
     }
     
-    private String obtenerValoresDeAtributos(Object objeto) {
-        // Por implementar
-        return null;
+    private List<String> obtenerValoresDeAtributos(Object objeto) {
+        List<String> atributos = this.obtenerNombresDeAtributos(objeto);
+        List<String> valores = new ArrayList<>();
+        
+        try {
+            for (int contador = 0; contador < atributos.size(); contador++) {
+                String nombreMetodo = "get" + StringUtils.capitalize(atributos.get(contador).replace("'", ""));
+                Method metodo = objeto.getClass().getMethod(nombreMetodo);
+                String valorMetodo = "'" + metodo.invoke(objeto).toString() + "'";
+                valores.add(valorMetodo);
+            }
+        }
+        catch(Exception e){
+           System.out.println(e);
+        }
+
+        return valores;
     }
     
     private String lineaDesdeArray(List<String> listaDatos) {
@@ -96,5 +111,19 @@ public class DataBaseManager {
         String linea = String.join(", ", listaDeDatos);
         return linea;
         
+    }
+    
+    private String evaluarLlavePrimaria(Object objeto, String nombreLLavePrimaria) {
+        String valor = new String();
+        
+        try {
+            String nombreMetodo = "get" + StringUtils.capitalize(nombreLLavePrimaria.replace("'", ""));
+            Method metodo = objeto.getClass().getMethod(nombreMetodo);
+            valor = metodo.invoke(objeto).toString();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return valor;
     }
 }

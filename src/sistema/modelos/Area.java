@@ -26,7 +26,7 @@ public class Area {
         return nombre;
     }
     
-    public String getCodigoDepartamento() {
+    public String getCodigoArea() {
         return codigoArea;
     }
 
@@ -35,7 +35,7 @@ public class Area {
         this.nombre = nombre;
     }
     
-    public void setCodigoDepartamento(String codigoDepartamento) {
-        this.codigoArea = codigoDepartamento;
+    public void setCodigoArea(String codigoArea) {
+        this.codigoArea = codigoArea;
     }
 }
