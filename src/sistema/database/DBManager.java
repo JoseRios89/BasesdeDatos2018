@@ -1,8 +1,18 @@
+package sistema.database;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.reflect.Method;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sistema.scripts.DBScripts;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,12 +24,95 @@ import java.lang.reflect.Method;
  *
  * @author jramos
  */
-public class DataBaseManager {
+public class DBManager {
+    private static DBManager databaseManager;
+    private static DBConnector connector;
 
-    public DataBaseManager() {
-        // El constructor de este objeto debe de cargar la conexión a la base de datos.
-        // Esta clase podría ser un singleton para evitar abrir varias instancias de la
-        // conexión a la base de datos.
+    public static DBConnector getConnector() {
+        return connector;
+    }
+
+    public static void setConnector(DBConnector connector) {
+        DBManager.connector = connector;
+    }
+
+    public DBManager() {
+
+    }
+    
+    // Se se quiere usar una instancia de esta clase, se debe de
+    // utilizar este metodo estatito. En lugar de iniciarlizar un objeto nuevo.
+    // DBManager manager = DBManager.getInstance();
+    //
+    public static DBManager getInstance(){
+        if(databaseManager == null){
+            databaseManager = new DBManager();
+            connector = new DBConnector();
+        }
+        connector.connect();
+        return databaseManager;
+    }
+    
+    public void executeUpdate(String query) {
+        connector.executeUpdate(query);
+    }
+    
+    public void executeQuery(String query) {
+        ResultSet resultados = connector.executeQuery(query);
+        try {
+            List<String> results = new ArrayList<>();
+            while(resultados.next()) {
+                System.out.println(resultados.getString(1));
+                results.add(resultados.getString(1));
+            }
+            System.out.println(results);
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }
+    
+    @SuppressWarnings("null")
+    public boolean createDB() {
+        DBScripts scripts = new DBScripts();
+        File file = scripts.readFileToCreateDataBase();
+        boolean isScriptExecuted = false;
+
+        try {
+            StringBuilder query = new StringBuilder();
+            try (BufferedReader in = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+                String linea;
+                while ((linea = in.readLine()) != null) {
+                    query.append(linea).append("\n");
+                }
+            }
+            connector.executeUpdate(query.toString());
+            isScriptExecuted = true;
+        } catch (Exception e) {
+            System.err.println("=== DBManager:CreateDB::Exception ===> " + e);
+        }
+        return isScriptExecuted;
+    }
+    
+    @SuppressWarnings("null")
+    public boolean createTables() {
+        DBScripts scripts = new DBScripts();
+        File file = scripts.readFileToCreateTables();
+        boolean isScriptExecuted = false;
+
+        try {
+            StringBuilder query = new StringBuilder();
+            try (BufferedReader in = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+                String linea;
+                while ((linea = in.readLine()) != null) {
+                    query.append(linea).append("\n");
+                }
+            }
+            connector.executeUpdate(query.toString());
+            isScriptExecuted = true;
+        } catch (Exception e) {
+            System.err.println("=== DBManager:CreateTables::Exception ===> " + e);
+        }
+        return isScriptExecuted;
     }
     
     // Metodo para salvar los datos de un objeto en la BD.
@@ -70,6 +163,27 @@ public class DataBaseManager {
         query.append("'").append(valorLlavePrimaria).append("'").append(";");
 
         System.out.println(query.toString());
+    }
+        
+    // Cambiar el tipo de retorno del metodo al hacer el llamado a la BD.
+    //public List<Object> obtenerLista(String nombreClase) {
+    public void obtenerLista(String nombreClase) {
+        String nombreTabla = new StringBuilder().append("tbl_").
+          append(nombreClase.toLowerCase()).toString();
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT * FROM ").append(nombreTabla).append(";");
+
+        ResultSet resultados = connector.executeQuery(query.toString());
+
+        try {
+            System.out.println(resultados.first());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void cerrarConexion() {
+        connector.close();
     }
     
     private List<String> obtenerNombresDeAtributos(Object objeto) {

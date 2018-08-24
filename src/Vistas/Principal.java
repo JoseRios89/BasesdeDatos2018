@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import sistema.modelos.Incidencia;
-import sistema.modelos.control;
+import sistema.database.DBConnector;
 
 /**
  *
@@ -29,7 +29,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     Incidencia incidencia = new Incidencia();
-    control control = new control();
+    DBConnector control = new DBConnector();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -444,7 +444,7 @@ public class Principal extends javax.swing.JFrame {
     
     private void btn_enviarMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarMensajeActionPerformed
 
-        control.conexion();
+        control.connect();
         asignarDatos();
         
 
@@ -474,7 +474,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
  
         
-        control.conexion();
+        control.connect();
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
