@@ -108,6 +108,11 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Ingrese sus Datos");
 
         btnRegistro.setText("Registro");
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,6 +189,14 @@ public class Login extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+
+        Registro registro = new Registro();
+        registro.setVisible(true);
+        
+        
+    }//GEN-LAST:event_btnRegistroActionPerformed
 
     /**
      * @param args the command line arguments
