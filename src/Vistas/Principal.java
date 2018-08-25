@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import sistema.modelos.Incidencia;
 import sistema.database.DBConnector;
+import sistema.database.DBManager;
 
 /**
  *
@@ -418,6 +419,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_tipoActionPerformed
     
     public void asignarDatos() {
+        Incidencia incidencia = new Incidencia();
         
         String tipo = (String) cb_tipo.getSelectedItem();
         incidencia.setTipo(tipo);
@@ -441,12 +443,16 @@ public class Principal extends javax.swing.JFrame {
         
     }    
     
+    private Incidencia crearIncidencia() {
+        Incidencia incidencia = new Incidencia();
+        incidencia.setCodigoIncidencia(txt_titulo.getText());
+        return incidencia;
+    }
+    
     private void btn_enviarMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarMensajeActionPerformed
-
-        control.connect();
-        asignarDatos();
-        
-
+        DBManager manager = DBManager.getInstance();
+        Incidencia incidencia = crearIncidencia();
+        // manager.salvarObjeto(incidencia);
     }//GEN-LAST:event_btn_enviarMensajeActionPerformed
     
 
