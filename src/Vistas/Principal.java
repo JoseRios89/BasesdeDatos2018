@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 import sistema.modelos.Incidencia;
 import sistema.database.DBConnector;
 import sistema.database.DBManager;
+import sistema.modelos.Cliente;
 
 /**
  *
@@ -446,7 +448,29 @@ public class Principal extends javax.swing.JFrame {
     private Incidencia crearIncidencia() {
         Incidencia incidencia = new Incidencia();
         incidencia.setCodigoIncidencia(txt_titulo.getText());
+        List<Incidencia> listaIncidencia = null;
+        listaIncidencia.add(incidencia);
+        incidencia.getCodigoIncidencia();
         return incidencia;
+    }
+    
+    private void dummy() {
+        DBManager manager = DBManager.getInstance();
+        //List<Cliente> listaClientes = manager.obtenerLista("Cliente");
+        // Vaidar que exista un cliente que tiene los datos ingresados.
+        Cliente cliente1 = new Cliente("Jesus", "Ramos", "C1");
+        Cliente cliente2 = new Cliente("Daniel", "Solano", "C2");
+        List<Cliente> listaClientes = null;
+        listaClientes.add(cliente1);
+        listaClientes.add(cliente2);
+        for (int i = 0; i <= listaClientes.size(); i++) {
+            Cliente cliente = listaClientes.get(i);
+            if (cliente.getCodigoCliente() == "C1") {
+                // ingresaPrincipal();
+            } else {
+                // Mostrar ventana de error.
+            }
+        }
     }
     
     private void btn_enviarMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarMensajeActionPerformed
