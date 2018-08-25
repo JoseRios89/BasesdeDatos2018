@@ -6,7 +6,6 @@
 package Vistas;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -35,9 +34,9 @@ public class Login extends javax.swing.JFrame {
                     + "Has ingresado satisfactoriamente al sistema", "Mensaje de bienvenida",
                     JOptionPane.INFORMATION_MESSAGE);
 
-            Principal formformulario1 = new Principal();
+            Principal Principal = new Principal();
 
-            formformulario1.setVisible(true);
+           Principal.setVisible(true);
 
         } else {
 

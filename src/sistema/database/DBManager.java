@@ -3,8 +3,10 @@ package sistema.database;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.reflect.Method;
@@ -86,7 +88,7 @@ public class DBManager {
             }
             connector.executeUpdate(query.toString());
             isScriptExecuted = true;
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.err.println("=== DBManager:CreateDB::Exception ===> " + e);
         }
         return isScriptExecuted;
@@ -108,7 +110,7 @@ public class DBManager {
             }
             connector.executeUpdate(query.toString());
             isScriptExecuted = true;
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.err.println("=== DBManager:CreateTables::Exception ===> " + e);
         }
         return isScriptExecuted;
@@ -264,7 +266,7 @@ public class DBManager {
                 valores.add(valorMetodo);
             }
         }
-        catch(Exception e){
+        catch(IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException | InvocationTargetException e){
            System.out.println(e);
         }
 
@@ -285,7 +287,7 @@ public class DBManager {
             String nombreMetodo = "get" + StringUtils.capitalize(nombreLLavePrimaria.replace("'", ""));
             Method metodo = objeto.getClass().getMethod(nombreMetodo);
             valor = metodo.invoke(objeto).toString();
-        } catch (Exception e) {
+        } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException | InvocationTargetException e) {
             System.out.println(e);
         }
         
