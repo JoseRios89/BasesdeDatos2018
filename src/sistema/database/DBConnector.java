@@ -14,7 +14,7 @@ public class DBConnector {
     
     // Cambiar estos datos, segun los de cada computadora, o pasarlos via parametros.
     private final String username = "root";
-    private final String password = "Hola1234";
+    private final String password = "1234";
     private final String host     = "localhost";
     private final String port     = "3306";
     private String       database = "sistema_tiquetes";
