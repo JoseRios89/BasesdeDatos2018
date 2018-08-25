@@ -33,6 +33,10 @@ public class DBConnector {
         this.database = database;
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     @SuppressWarnings("null")
     public void executeUpdate(String query) {
         try {

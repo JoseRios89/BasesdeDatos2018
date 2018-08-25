@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.reflect.Method;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -36,9 +37,7 @@ public class DBManager {
         DBManager.connector = connector;
     }
 
-    public DBManager() {
-
-    }
+    public DBManager() {}
     
     // Se se quiere usar una instancia de esta clase, se debe de
     // utilizar este metodo estatito. En lugar de iniciarlizar un objeto nuevo.
@@ -126,8 +125,48 @@ public class DBManager {
         query.append("INSERT INTO ").append(nombreTabla);
         query.append(" (").append(atributosObjeto).append(")");
         query.append(" VALUES (").append(valoresObjeto).append(");");
+        
+        try {
+            PreparedStatement statement = connector.getConnection().prepareCall(query.toString());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("=== DBManager:SalvarObjeto::Exception ===> " + ex);
+        }
+    }
 
-        System.out.println(query.toString());
+    // Metodo para actualizar la información de la BD.
+    public void actualizarObjeto(Object objeto) {
+        String nombreClase = objeto.getClass().getSimpleName();
+        String nombreTabla = new StringBuilder().append("tbl_").
+          append(nombreClase.toLowerCase()).toString();
+        List<String> atributosObjeto = this.obtenerNombresDeAtributos(objeto);
+        String llavePrimaria = new StringBuilder().append("codigo").append(nombreClase).toString();
+        List<String> valoresObjeto = this.obtenerValoresDeAtributos(objeto);
+        String valorLlavePrimaria = this.evaluarLlavePrimaria(objeto, llavePrimaria);
+
+        StringBuilder query = new StringBuilder();
+        query.append("UPDATE ").append(nombreTabla).append(" SET ");
+        
+        for (int index = 0; index < atributosObjeto.size(); index++) {
+            String atributo = atributosObjeto.get(index);
+            String valorAtributo =  valoresObjeto.get(index);
+            query.append(atributo).append(" = ").append(valorAtributo);
+            if(index != atributosObjeto.size() -1 ) {
+                query.append(", ");
+            } else {
+                query.append(" ");
+            }
+        }
+        
+        query.append(" WHERE ").append(llavePrimaria).append(" = ");
+        query.append("\"").append(valorLlavePrimaria).append("\"").append(";");
+
+        try {
+            PreparedStatement statement = connector.getConnection().prepareCall(query.toString());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("=== DBManager:ActualizarObjeto::Exception ===> " + ex);
+        }
     }
     
     // Metodo para borrar los datos de la BD.
@@ -141,28 +180,15 @@ public class DBManager {
         StringBuilder query = new StringBuilder();
         query.append("DELETE FROM ").append(nombreTabla);
         query.append(" WHERE ").append(llavePrimaria).append(" = ");
-        query.append("'").append(valorLlavePrimaria).append("'").append(";");
+        query.append("\"").append(valorLlavePrimaria).append("\"").append(";");
         
-        System.out.println(query.toString());
-    }
-    
-    // Metodo para actualizar la información de la BD.
-    public void actualizarObjeto(Object objeto) {
-        String nombreClase = objeto.getClass().getSimpleName();
-        String nombreTabla = new StringBuilder().append("tbl_").
-          append(nombreClase.toLowerCase()).toString();
-        String atributosObjeto = this.lineaDesdeArray(this.obtenerNombresDeAtributos(objeto));
-        String llavePrimaria = new StringBuilder().append("codigo").append(nombreClase).toString();
-        String valoresObjeto = this.lineaDesdeArray(this.obtenerValoresDeAtributos(objeto));
-        String valorLlavePrimaria = this.evaluarLlavePrimaria(objeto, llavePrimaria);
-
-        StringBuilder query = new StringBuilder();
-        query.append("UPDATE ").append(nombreTabla);
-        query.append(" SET ").append(valoresObjeto);
-        query.append(" WHERE ").append(llavePrimaria).append(" = ");
-        query.append("'").append(valorLlavePrimaria).append("'").append(";");
-
-        System.out.println(query.toString());
+        try {
+            System.out.println(query.toString());
+            PreparedStatement statement = connector.getConnection().prepareCall(query.toString());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("=== DBManager:DestruirObjeto::Exception ===> " + ex);
+        }
     }
         
     // Cambiar el tipo de retorno del metodo al hacer el llamado a la BD.
@@ -173,12 +199,22 @@ public class DBManager {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM ").append(nombreTabla).append(";");
 
-        ResultSet resultados = connector.executeQuery(query.toString());
+        String className = "sistema.modelos." + StringUtils.capitalize(nombreClase);
 
         try {
-            System.out.println(resultados.first());
+            Class klass = Class.forName(className);
+            List<String> atributos = this.obtenerNombresDeAtributos(klass);
+            ResultSet resultados = connector.getConnection().prepareCall(query.toString()).executeQuery();
+            while(resultados.next()) {
+                for (int index = 0; index <= atributos.size(); index++) {
+                    String columnValue = resultados.getString(index);
+                    System.out.println(columnValue);
+                }
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("=== DBManager:ObtenerLista::SQLException ===> " + ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println("=== DBManager:ObtenerLista::ClassNotFoundException ===> " + ex);
         }
     }
     
@@ -194,7 +230,22 @@ public class DBManager {
             StringBuilder atributoFormateado = new StringBuilder();
             //you can also use .toGenericString() instead of .getName(). This will
             //give you the type information as well.
-            atributoFormateado.append("'").append(field.getName()).append("'");
+            atributoFormateado.append(field.getName());
+            atributosDeClase.add(atributoFormateado.toString());
+        }
+        
+        return atributosDeClase;
+    }
+    
+    // Sobrecarga de metodo, para obtener los valores del objetos segun la clase.
+    private List<String> obtenerNombresDeAtributos(Class clazz) {
+        List<String> atributosDeClase = new ArrayList<>();
+
+        for(Field field : clazz.getDeclaredFields()) {
+            StringBuilder atributoFormateado = new StringBuilder();
+            //you can also use .toGenericString() instead of .getName(). This will
+            //give you the type information as well.
+            atributoFormateado.append(field.getName());
             atributosDeClase.add(atributoFormateado.toString());
         }
         
@@ -209,7 +260,7 @@ public class DBManager {
             for (int contador = 0; contador < atributos.size(); contador++) {
                 String nombreMetodo = "get" + StringUtils.capitalize(atributos.get(contador).replace("'", ""));
                 Method metodo = objeto.getClass().getMethod(nombreMetodo);
-                String valorMetodo = "'" + metodo.invoke(objeto).toString() + "'";
+                String valorMetodo = "\"" + metodo.invoke(objeto).toString() + "\"";
                 valores.add(valorMetodo);
             }
         }
