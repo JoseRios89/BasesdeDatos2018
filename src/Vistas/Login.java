@@ -20,6 +20,10 @@ public class Login extends javax.swing.JFrame {
         initComponents();
     }
 
+    Login(String string, String abcd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void ingresar() {
 
         char clave[] = jpassClave.getPassword();
