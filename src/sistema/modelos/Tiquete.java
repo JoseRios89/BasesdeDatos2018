@@ -2,8 +2,14 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+
+tiquete (titulo, descripcion, fecha_creacion, fecha_solucion)
+  |--> incidencias (descripcion, 
+
+
  */
 package sistema.modelos;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -11,6 +17,9 @@ import java.util.Date;
  * @author jramos
  */
 public class Tiquete {
+    private final static String[] CATEGORIAS = { "Software", "Hardware" };
+    private final static String[] TIPOS = { "Incidente", "Mantenimiento", "Arreglo" };
+    private final static String[] PRIORIDADES = { "Alta", "Media", "Baja" };
     private String codigoTiquete;
     private Date fechaCreacion;
     private Date fechaSolucion;
@@ -71,6 +80,18 @@ public class Tiquete {
 
     public String getCodigoTiquete() {
         return codigoTiquete;
+    }
+
+    public static String[] getCATEGORIAS() {
+        return CATEGORIAS;
+    }
+
+    public static String[] getTIPOS() {
+        return TIPOS;
+    }
+
+    public static String[] getPRIORIDADES() {
+        return PRIORIDADES;
     }
 
     public void setCodigoTiquete(String codigoTiquete) {
