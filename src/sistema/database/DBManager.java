@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -13,8 +14,7 @@ import java.lang.reflect.Method;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import sistema.modelos.Area;
 import sistema.scripts.DBScripts;
 
 /*
@@ -195,29 +195,50 @@ public class DBManager {
         
     // Cambiar el tipo de retorno del metodo al hacer el llamado a la BD.
     //public List<Object> obtenerLista(String nombreClase) {
-    public void obtenerLista(String nombreClase) {
+    public ArrayList<Object> obtenerLista(String nombreClase) {
+        ArrayList<Object> listaDeResultados = new ArrayList<>();
         String nombreTabla = new StringBuilder().append("tbl_").
           append(nombreClase.toLowerCase()).toString();
         StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM ").append(nombreTabla).append(";");
+        query.append("SELECT * FROM ").append(nombreTabla);
+        
 
         String className = "sistema.modelos." + StringUtils.capitalize(nombreClase);
 
         try {
             Class klass = Class.forName(className);
             List<String> atributos = this.obtenerNombresDeAtributos(klass);
+
+            // Inicio ==> Obtener datos, en el mismo orden que el constructor del objeto.
+            String ordenColumnas = this.lineaDesdeArray(atributos);
+            query.append(" ORDER BY ").append(ordenColumnas).append(";");
+            // Fin    ==> Obtener datos, en el mismo orden que el constructor del objeto.
+
             ResultSet resultados = connector.getConnection().prepareCall(query.toString()).executeQuery();
             while(resultados.next()) {
-                for (int index = 0; index <= atributos.size(); index++) {
-                    String columnValue = resultados.getString(index);
-                    System.out.println(columnValue);
+                try {
+                    Constructor<?> constructor = klass.getConstructor();
+                    Object objeto = constructor.newInstance();
+
+                    for (int index = 1; index < atributos.size(); index++) {
+                        String nombreMetodo = "set" + StringUtils.capitalize(atributos.get(index).replace("'", ""));
+                        Method metodo = objeto.getClass().getDeclaredMethod(nombreMetodo, String.class);
+                        metodo.invoke(objeto, resultados.getString(index));
+                    }
+                    Area area = (Area) objeto;
+                    System.out.println(area.getNombre());
+                    listaDeResultados.add(objeto);
+                } catch (Exception ex) {
+                    System.out.println("=== DBManager:ObtenerLista::WhileLoop ===> " + ex);
                 }
-            }
+           }
         } catch (SQLException ex) {
             System.out.println("=== DBManager:ObtenerLista::SQLException ===> " + ex);
         } catch (ClassNotFoundException ex) {
             System.out.println("=== DBManager:ObtenerLista::ClassNotFoundException ===> " + ex);
         }
+
+        return listaDeResultados;
     }
     
     public void cerrarConexion() {

@@ -27,8 +27,12 @@ public class Tiquete {
     private String solucion;
     private String estado;
     private String codigoCliente;
+    private String titulo;
+    private String categoria;
+    private String tipo;
+    private String prioridad;
 
-    public Tiquete(String codigoTiquete, Date fechaCreacion, Date fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente) {
+    public Tiquete(String codigoTiquete, Date fechaCreacion, Date fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo, String categoria, String tipo, String prioridad) {
         this.codigoTiquete = codigoTiquete;
         this.fechaCreacion = fechaCreacion;
         this.fechaSolucion = fechaSolucion;
@@ -36,10 +40,10 @@ public class Tiquete {
         this.solucion = solucion;
         this.estado = estado;
         this.codigoCliente = codigoCliente;
-    }
-
-    public Tiquete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.titulo = titulo;
+        this.categoria = categoria;
+        this.tipo = tipo;
+        this.prioridad = prioridad;
     }
 
     public Date getFechaCreacion() {
@@ -109,4 +113,38 @@ public class Tiquete {
     public void setCodigoCliente(String codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(String prioridad) {
+        this.prioridad = prioridad;
+    }
+    
+    
 }
