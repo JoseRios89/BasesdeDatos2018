@@ -1,31 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vistas;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import sistema.modelos.Incidencia;
 import sistema.database.DBConnector;
 import sistema.database.DBManager;
 import sistema.modelos.Cliente;
 import sistema.modelos.Credenciales;
+import sistema.modelos.Tiquete;
 
-/**
- *
- * @author Daniel
- */
+
 public class Principal extends javax.swing.JFrame {
-    
+
     public Principal() {
         initComponents();
     }
-    
+
     Incidencia incidencia = new Incidencia();
     DBConnector control = new DBConnector();
-  Credenciales credenciales = new Credenciales();
-    
+    Credenciales credenciales = new Credenciales();
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,15 +39,12 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btn_enviarMensaje = new javax.swing.JButton();
         cb_tipo = new javax.swing.JComboBox<>();
         cb_categoria = new javax.swing.JComboBox<>();
         cb_urgencia = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        cb_seguimiento = new javax.swing.JComboBox<>();
         txt_titulo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_descripcion = new javax.swing.JTextArea();
@@ -96,7 +92,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
-                .addContainerGap(501, Short.MAX_VALUE))
+                .addContainerGap(717, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,10 +119,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel4.setText("Categoría");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel2.setText("Urgencia");
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel5.setText("Informe de Seguimiento");
+        jLabel2.setText("Prioridad");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel7.setText("Título del problema");
@@ -135,37 +128,36 @@ public class Principal extends javax.swing.JFrame {
         jLabel8.setText("Descripción del problema");
 
         btn_enviarMensaje.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btn_enviarMensaje.setText("Enviar Mensaje");
+        btn_enviarMensaje.setText("Crear Tiquete");
         btn_enviarMensaje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_enviarMensajeActionPerformed(evt);
             }
         });
 
-        cb_tipo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cb_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Incidente", "Solicitud" }));
+        cb_tipo.setFont(new java.awt.Font("Times New Roman", 0, 14));
+        cb_tipo.addItem("Incidente");
+        cb_tipo.addItem("Mantenimiento");
+        cb_tipo.addItem("Arreglo");
         cb_tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_tipoActionPerformed(evt);
             }
         });
 
-        cb_categoria.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cb_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Software", "Hardware" }));
+        cb_categoria.setFont(new java.awt.Font("Times New Roman", 0, 14));
+        cb_categoria.addItem("Software");
+        cb_categoria.addItem("Hardware");
 
-        cb_urgencia.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cb_urgencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alto", "Medio", "Bajo" }));
+        cb_urgencia.setFont(new java.awt.Font("Times New Roman", 0, 14));
+        cb_urgencia.addItem("Alta");
+        cb_urgencia.addItem("Media");
+        cb_urgencia.addItem("Baja");
         cb_urgencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_urgenciaActionPerformed(evt);
             }
         });
-
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel9.setText("Seguimiento por E-Mail");
-
-        cb_seguimiento.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cb_seguimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
 
         txt_descripcion.setColumns(20);
         txt_descripcion.setRows(5);
@@ -183,38 +175,32 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(236, 236, 236)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(179, 179, 179)
                                 .addComponent(Txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(0, 357, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(173, 173, 173)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_titulo)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cb_seguimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cb_urgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                                    .addComponent(cb_categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(426, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btn_enviarMensaje)
-                .addGap(581, 581, 581))
+                                        .addComponent(jLabel4)
+                                        .addGap(106, 106, 106))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_urgencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_titulo, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cb_tipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 350, Short.MAX_VALUE))
+                            .addComponent(btn_enviarMensaje, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(318, 318, 318)))
+                .addGap(207, 207, 207))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,34 +209,29 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(Txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cb_urgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel9)
-                    .addComponent(cb_seguimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txt_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                        .addGap(63, 63, 63)
                         .addComponent(btn_enviarMensaje)
-                        .addGap(71, 71, 71))
+                        .addGap(69, 69, 69))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -283,7 +264,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(153, Short.MAX_VALUE)
+                .addContainerGap(369, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(131, 131, 131))
         );
@@ -347,7 +328,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(cb_incidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(370, 370, 370)
                         .addComponent(btnBuscar)))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(426, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,35 +389,12 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cb_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipoActionPerformed
-        
+
 
     }//GEN-LAST:event_cb_tipoActionPerformed
-    
-    public void asignarDatos() {
-        Incidencia incidencia = new Incidencia();
-        
-        String tipo = (String) cb_tipo.getSelectedItem();
-        incidencia.setTipo(tipo);
-        
-        String categoria = (String) cb_categoria.getSelectedItem();
-        incidencia.setCategoria(categoria);
-        
-        String urgencia = (String) cb_urgencia.getSelectedItem();
-        incidencia.setUrgencia(urgencia);
-        
-        String seguimiento = (String) cb_seguimiento.getSelectedItem();
-        incidencia.setSeguimiento(seguimiento);
-        
-        String titulo = (String) txt_titulo.getText();
-        
-        incidencia.setTitulo(titulo);
-        
-        String descripcion = (String) txt_descripcion.getText();
-        
-        incidencia.setDescripcion(descripcion);
-        
-    }    
-    
+
+
+
     private Incidencia crearIncidencia() {
         Incidencia incidencia = new Incidencia();
         incidencia.setCodigoIncidencia(txt_titulo.getText());
@@ -446,7 +404,7 @@ public class Principal extends javax.swing.JFrame {
         incidencia.getCodigoIncidencia();
         return incidencia;
     }
-    
+
     private void dummy() {
         DBManager manager = DBManager.getInstance();
         //List<Cliente> listaClientes = manager.obtenerLista("Cliente");
@@ -465,27 +423,41 @@ public class Principal extends javax.swing.JFrame {
             }
         }
     }
+
+
     
+    
+    
+
     private void btn_enviarMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarMensajeActionPerformed
         DBManager manager = DBManager.getInstance();
-        Incidencia incidencia = crearIncidencia();
+        Date fecha = new Date();
+        Tiquete tiquete;
+        Cliente cliente  = new Cliente("C1", "Daniel", "Solano");
+        
+
+        manager.salvarObjeto(cliente);
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        tiquete = new Tiquete("T1",dateformat.format(fecha),dateformat.format(fecha),txt_descripcion.getText(),
+        "Pendiente","Ingresada",cliente.getCodigoCliente(),txt_titulo.getText(),(String )cb_categoria.getSelectedItem(),(String )cb_tipo.getSelectedItem(),(String)cb_urgencia.getSelectedItem());
+        manager.salvarObjeto(tiquete);
+ 
         //manager.salvarObjeto(incidencia);
     }//GEN-LAST:event_btn_enviarMensajeActionPerformed
-    
+
     private void cb_urgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_urgenciaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_urgenciaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 
-
         Acerca_de acerca = new Acerca_de();
-       acerca.setVisible(true);
-        
+        acerca.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void cb_incidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_incidenciaActionPerformed
@@ -493,8 +465,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_incidenciaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
- 
-        
+
         control.connect();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -540,7 +511,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btn_enviarMensaje;
     private javax.swing.JComboBox<String> cb_categoria;
     private javax.swing.JComboBox<String> cb_incidencia;
-    private javax.swing.JComboBox<String> cb_seguimiento;
     private javax.swing.JComboBox<String> cb_tipo;
     private javax.swing.JComboBox<String> cb_urgencia;
     private javax.swing.JLabel jLabel1;
@@ -550,10 +520,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;

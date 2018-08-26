@@ -9,6 +9,7 @@ tiquete (titulo, descripcion, fecha_creacion, fecha_solucion)
 
  */
 package sistema.modelos;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,10 +18,9 @@ import java.util.Date;
  * @author jramos
  */
 public class Tiquete {
-    private final static String[] CATEGORIAS = { "Software", "Hardware" };
-    private final static String[] TIPOS = { "Incidente", "Mantenimiento", "Arreglo" };
-    private final static String[] PRIORIDADES = { "Alta", "Media", "Baja" };
+
     private String codigoTiquete;
+
     private String fechaCreacion;
     private String fechaSolucion;
     private String descripcion;
@@ -29,8 +29,11 @@ public class Tiquete {
     private String codigoCliente;
     private String titulo;
 
+    private String categorias;
+    private String tipo;
+    private String prioridad;
 
-    public Tiquete(String codigoTiquete, String fechaCreacion, String fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo) {
+    public Tiquete(String codigoTiquete, String fechaCreacion, String fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo,String categorias, String tipo, String prioridad) {
         this.codigoTiquete = codigoTiquete;
         this.fechaCreacion = fechaCreacion;
         this.fechaSolucion = fechaSolucion;
@@ -39,7 +42,16 @@ public class Tiquete {
         this.estado = estado;
         this.codigoCliente = codigoCliente;
         this.titulo = titulo;
+        this.tipo = tipo;
+        this.prioridad = prioridad;
+    }
 
+    public String getCodigoTiquete() {
+        return codigoTiquete;
+    }
+
+    public void setCodigoTiquete(String codigoTiquete) {
+        this.codigoTiquete = codigoTiquete;
     }
 
     public String getFechaCreacion() {
@@ -80,26 +92,6 @@ public class Tiquete {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }  
-
-    public String getCodigoTiquete() {
-        return codigoTiquete;
-    }
-
-    public static String[] getCATEGORIAS() {
-        return CATEGORIAS;
-    }
-
-    public static String[] getTIPOS() {
-        return TIPOS;
-    }
-
-    public static String[] getPRIORIDADES() {
-        return PRIORIDADES;
-    }
-
-    public void setCodigoTiquete(String codigoTiquete) {
-        this.codigoTiquete = codigoTiquete;
     }
 
     public String getCodigoCliente() {
@@ -117,4 +109,30 @@ public class Tiquete {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+    public String getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(String categorias) {
+        this.categorias = categorias;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(String prioridad) {
+        this.prioridad = prioridad;
+    }
+
+
 }

@@ -10,15 +10,18 @@ package sistema.modelos;
  * @author jramos
  */
 public class Cliente {
+    private String codigoCliente;
     private String nombre;
     private String apellido;
-    private String codigoCliente;
 
-    public Cliente(String nombre, String apellido, String codigoCliente) {
+    public Cliente(String codigoCliente, String nombre, String apellido) {
+        this.codigoCliente = codigoCliente;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.codigoCliente = codigoCliente;
     }
+
+
+  
 
     public String getNombre() {
         return nombre;
