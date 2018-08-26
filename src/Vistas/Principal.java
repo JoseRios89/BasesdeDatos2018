@@ -23,16 +23,6 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
     }
-
-    Incidencia incidencia = new Incidencia();
-  Credenciales credenciales = new Credenciales();
-  
-  /*
-  String codigoArea = txt_input.getText();
-  String nombre = nombre_txt.getText();
-  Area area = new Area(codigoArea, nombre);
-  manager.salvarObjeto(area);
-  */
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -197,17 +187,25 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(0, 286, Short.MAX_VALUE)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(173, 173, 173)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txt_titulo)
                                     .addComponent(cb_urgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                                     .addComponent(cb_categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
                                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(207, 207, 207))
+=======
+                                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(426, Short.MAX_VALUE))
+>>>>>>> cambios inserción de datos queda pendiente solucionar el problema de la llave foranea correspondiente a tbltiquete
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btn_enviarMensaje)
@@ -238,7 +236,19 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(txt_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+<<<<<<< HEAD
                         .addGap(37, 37, 37)
+=======
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(22, 22, 22)
+                        .addComponent(btn_enviarMensaje)
+                        .addGap(31, 31, 31))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+>>>>>>> cambios inserción de datos queda pendiente solucionar el problema de la llave foranea correspondiente a tbltiquete
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -408,57 +418,9 @@ public class Principal extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_cb_tipoActionPerformed
-
-    
-    
- private Incidencia crearIncidencia() {
-     /*
-     1) Obtener parametros del tiquete.
-     2) Asignar los parametros del tiquete.
-     3) Crea el tiquete en la BD.
-     4) Obtiene los parametros de la incidencia.
-     5) Asigna el id del tiquete en las incidencias.
-     6) Crea cada una de las incidencias.
-     */
-        incidencia.setCodigoIncidencia(txt_titulo.getText());
-         incidencia.setDescripcion(txt_descripcion.getText());
-       incidencia.setPrecioUnitario(Integer.parseInt((txtPrecio.getText())));
-       incidencia.setTipo((String) cb_tipo.getSelectedItem());
-        
-        incidencia.setCategoria((String) cb_categoria.getSelectedItem());
-        incidencia.setUrgencia((String) cb_urgencia.getSelectedItem());
-
-        incidencia.setTitulo(txt_titulo.getText());
-       
-        
-       /* List<Incidencia> listaIncidencia = null;
-        listaIncidencia.add(incidencia);
-        incidencia.getCodigoIncidencia();*/
-        return incidencia;  
-    }      
-
-private void dummy() {
-        DBManager manager = DBManager.getInstance();
-        //List<Cliente> listaClientes = manager.obtenerLista("Cliente");
-        // Vaidar que exista un cliente que tiene los datos ingresados.
-        Cliente cliente1 = new Cliente("Jesus", "Ramos", "C1");
-        Cliente cliente2 = new Cliente("Daniel", "Solano", "C2");
-        List<Cliente> listaClientes = null;
-        listaClientes.add(cliente1);
-        listaClientes.add(cliente2);
-        for (int i = 0; i <= listaClientes.size(); i++) {
-            Cliente cliente = listaClientes.get(i);
-            if (cliente.getCodigoCliente() == "C1") {
-                // ingresaPrincipal();
-            } else {
-                // Mostrar ventana de error.
-            }
-        }
-    }  
     
     private void btn_enviarMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarMensajeActionPerformed
- DBManager manager = DBManager.getInstance();
-   manager.salvarObjeto(crearIncidencia());
+        // Crear flujo de acción, para salvar el objeto.
     }//GEN-LAST:event_btn_enviarMensajeActionPerformed
     
     private void cb_urgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_urgenciaActionPerformed
@@ -537,6 +499,10 @@ private void dummy() {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+<<<<<<< HEAD
+=======
+    private javax.swing.JLabel jLabel5;
+>>>>>>> cambios inserción de datos queda pendiente solucionar el problema de la llave foranea correspondiente a tbltiquete
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

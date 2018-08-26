@@ -38,6 +38,10 @@ public class Tiquete {
         this.codigoCliente = codigoCliente;
     }
 
+    public Tiquete() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public Date getFechaCreacion() {
         return fechaCreacion;
     }
