@@ -157,8 +157,8 @@ public class Empleado extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_apellido1EmpleActionPerformed
 
     private void btnguardar_empleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardar_empleActionPerformed
-         if(txt_Nombre_Emple.getText() != "" && txt_apellido1Emple.getText() != "" && txt_apellido2Emple.getText() != ""
-              && txt_contraseña_emple.getText()!= ""){
+         if(!txt_Nombre_Emple.getText().equalsIgnoreCase("") && !txt_apellido1Emple.getText().equalsIgnoreCase("") && !txt_apellido2Emple.getText().equalsIgnoreCase("")
+            && !txt_contraseña_emple.getText().equalsIgnoreCase("")){
           //CODIGO GUARDAR
       }
       else {
