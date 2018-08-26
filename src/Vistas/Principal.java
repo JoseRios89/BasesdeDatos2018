@@ -5,14 +5,12 @@
  */
 package Vistas;
 
-
 import java.util.List;
 import sistema.modelos.Incidencia;
 import sistema.database.DBConnector;
 import sistema.database.DBManager;
 import sistema.modelos.Cliente;
 import sistema.modelos.Credenciales;
-import sistema.modelos.Tiquete;
 
 /**
  *
@@ -23,6 +21,10 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
     }
+    
+    Incidencia incidencia = new Incidencia();
+    DBConnector control = new DBConnector();
+  Credenciales credenciales = new Credenciales();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -38,18 +40,19 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btn_enviarMensaje = new javax.swing.JButton();
         cb_tipo = new javax.swing.JComboBox<>();
         cb_categoria = new javax.swing.JComboBox<>();
         cb_urgencia = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        cb_seguimiento = new javax.swing.JComboBox<>();
         txt_titulo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_descripcion = new javax.swing.JTextArea();
         Txtnombre = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtPrecio = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -122,6 +125,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel2.setText("Urgencia");
 
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel5.setText("Informe de Seguimiento");
+
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel7.setText("Título del problema");
 
@@ -137,7 +143,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         cb_tipo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cb_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(Tiquete.getTIPOS()));
+        cb_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Incidente", "Solicitud" }));
         cb_tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_tipoActionPerformed(evt);
@@ -145,21 +151,25 @@ public class Principal extends javax.swing.JFrame {
         });
 
         cb_categoria.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cb_categoria.setModel(new javax.swing.DefaultComboBoxModel<>((Tiquete.getCATEGORIAS())));
+        cb_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Software", "Hardware" }));
 
         cb_urgencia.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cb_urgencia.setModel(new javax.swing.DefaultComboBoxModel<>((Tiquete.getPRIORIDADES())));
+        cb_urgencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alto", "Medio", "Bajo" }));
         cb_urgencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_urgenciaActionPerformed(evt);
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel9.setText("Seguimiento por E-Mail");
+
+        cb_seguimiento.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        cb_seguimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+
         txt_descripcion.setColumns(20);
         txt_descripcion.setRows(5);
         jScrollPane1.setViewportView(txt_descripcion);
-
-        jLabel6.setText("Precio");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -178,38 +188,33 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel2)
+                                    .addComponent(jLabel5)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel6)))
+                                    .addComponent(jLabel8)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(179, 179, 179)
                                 .addComponent(Txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 286, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(173, 173, 173)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txt_titulo)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cb_seguimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(cb_urgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                                    .addComponent(cb_categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-<<<<<<< HEAD
-                                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cb_categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
+                                .addGap(15, 15, 15)
                                 .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(207, 207, 207))
-=======
-                                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(426, Short.MAX_VALUE))
->>>>>>> cambios inserción de datos queda pendiente solucionar el problema de la llave foranea correspondiente a tbltiquete
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btn_enviarMensaje)
-                .addGap(573, 573, 573))
+                .addGap(581, 581, 581))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,37 +235,25 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cb_urgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel9)
+                    .addComponent(cb_seguimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txt_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-<<<<<<< HEAD
-                        .addGap(37, 37, 37)
-=======
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(22, 22, 22)
+                        .addGap(30, 30, 30)
                         .addComponent(btn_enviarMensaje)
-                        .addGap(31, 31, 31))
+                        .addGap(71, 71, 71))
                     .addGroup(jPanel3Layout.createSequentialGroup()
->>>>>>> cambios inserción de datos queda pendiente solucionar el problema de la llave foranea correspondiente a tbltiquete
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(22, 22, 22)
-                .addComponent(btn_enviarMensaje)
-                .addGap(31, 31, 31))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Abrir Incidencia", jPanel3);
@@ -419,8 +412,64 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cb_tipoActionPerformed
     
+    public void asignarDatos() {
+        Incidencia incidencia = new Incidencia();
+        
+        String tipo = (String) cb_tipo.getSelectedItem();
+        incidencia.setTipo(tipo);
+        
+        String categoria = (String) cb_categoria.getSelectedItem();
+        incidencia.setCategoria(categoria);
+        
+        String urgencia = (String) cb_urgencia.getSelectedItem();
+        incidencia.setUrgencia(urgencia);
+        
+        String seguimiento = (String) cb_seguimiento.getSelectedItem();
+        incidencia.setSeguimiento(seguimiento);
+        
+        String titulo = (String) txt_titulo.getText();
+        
+        incidencia.setTitulo(titulo);
+        
+        String descripcion = (String) txt_descripcion.getText();
+        
+        incidencia.setDescripcion(descripcion);
+        
+    }    
+    
+    private Incidencia crearIncidencia() {
+        Incidencia incidencia = new Incidencia();
+        incidencia.setCodigoIncidencia(txt_titulo.getText());
+
+        List<Incidencia> listaIncidencia = null;
+        listaIncidencia.add(incidencia);
+        incidencia.getCodigoIncidencia();
+        return incidencia;
+    }
+    
+    private void dummy() {
+        DBManager manager = DBManager.getInstance();
+        //List<Cliente> listaClientes = manager.obtenerLista("Cliente");
+        // Vaidar que exista un cliente que tiene los datos ingresados.
+        Cliente cliente1 = new Cliente("Jesus", "Ramos", "C1");
+        Cliente cliente2 = new Cliente("Daniel", "Solano", "C2");
+        List<Cliente> listaClientes = null;
+        listaClientes.add(cliente1);
+        listaClientes.add(cliente2);
+        for (int i = 0; i <= listaClientes.size(); i++) {
+            Cliente cliente = listaClientes.get(i);
+            if (cliente.getCodigoCliente() == "C1") {
+                // ingresaPrincipal();
+            } else {
+                // Mostrar ventana de error.
+            }
+        }
+    }
+    
     private void btn_enviarMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarMensajeActionPerformed
-        // Crear flujo de acción, para salvar el objeto.
+        DBManager manager = DBManager.getInstance();
+        Incidencia incidencia = crearIncidencia();
+        //manager.salvarObjeto(incidencia);
     }//GEN-LAST:event_btn_enviarMensajeActionPerformed
     
     private void cb_urgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_urgenciaActionPerformed
@@ -445,7 +494,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
  
-
+        
+        control.connect();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
@@ -490,6 +540,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btn_enviarMensaje;
     private javax.swing.JComboBox<String> cb_categoria;
     private javax.swing.JComboBox<String> cb_incidencia;
+    private javax.swing.JComboBox<String> cb_seguimiento;
     private javax.swing.JComboBox<String> cb_tipo;
     private javax.swing.JComboBox<String> cb_urgencia;
     private javax.swing.JLabel jLabel1;
@@ -499,13 +550,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-<<<<<<< HEAD
-=======
     private javax.swing.JLabel jLabel5;
->>>>>>> cambios inserción de datos queda pendiente solucionar el problema de la llave foranea correspondiente a tbltiquete
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
@@ -521,7 +569,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextArea txt_descripcion;
     private javax.swing.JTextField txt_titulo;
     // End of variables declaration//GEN-END:variables
