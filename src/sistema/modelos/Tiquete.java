@@ -12,17 +12,14 @@ package sistema.modelos;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author jramos
- */
+
 public class Tiquete {
     private final static String[] CATEGORIAS = { "Software", "Hardware" };
     private final static String[] TIPOS = { "Incidente", "Mantenimiento", "Arreglo" };
     private final static String[] PRIORIDADES = { "Alta", "Media", "Baja" };
     private String codigoTiquete;
-    private Date fechaCreacion;
-    private Date fechaSolucion;
+    private String fechaCreacion;
+    private String fechaSolucion;
     private String descripcion;
     private String solucion;
     private String estado;
@@ -32,7 +29,7 @@ public class Tiquete {
     private String tipo;
     private String prioridad;
 
-    public Tiquete(String codigoTiquete, Date fechaCreacion, Date fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo, String categoria, String tipo, String prioridad) {
+    public Tiquete(String codigoTiquete, String fechaCreacion, String fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo, String categoria, String tipo, String prioridad) {
         this.codigoTiquete = codigoTiquete;
         this.fechaCreacion = fechaCreacion;
         this.fechaSolucion = fechaSolucion;
@@ -46,19 +43,19 @@ public class Tiquete {
         this.prioridad = prioridad;
     }
 
-    public Date getFechaCreacion() {
+    public String getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Date getFechaSolucion() {
+    public String getFechaSolucion() {
         return fechaSolucion;
     }
 
-    public void setFechaSolucion(Date fechaSolucion) {
+    public void setFechaSolucion(String fechaSolucion) {
         this.fechaSolucion = fechaSolucion;
     }
 
