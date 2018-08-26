@@ -12,7 +12,10 @@ package sistema.modelos;
 import java.util.ArrayList;
 import java.util.Date;
 
-
+/**
+ *
+ * @author jramos
+ */
 public class Tiquete {
     private final static String[] CATEGORIAS = { "Software", "Hardware" };
     private final static String[] TIPOS = { "Incidente", "Mantenimiento", "Arreglo" };
@@ -25,11 +28,9 @@ public class Tiquete {
     private String estado;
     private String codigoCliente;
     private String titulo;
-    private String categoria;
-    private String tipo;
-    private String prioridad;
 
-    public Tiquete(String codigoTiquete, String fechaCreacion, String fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo, String categoria, String tipo, String prioridad) {
+
+    public Tiquete(String codigoTiquete, String fechaCreacion, String fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo) {
         this.codigoTiquete = codigoTiquete;
         this.fechaCreacion = fechaCreacion;
         this.fechaSolucion = fechaSolucion;
@@ -38,9 +39,7 @@ public class Tiquete {
         this.estado = estado;
         this.codigoCliente = codigoCliente;
         this.titulo = titulo;
-        this.categoria = categoria;
-        this.tipo = tipo;
-        this.prioridad = prioridad;
+
     }
 
     public String getFechaCreacion() {
@@ -118,30 +117,4 @@ public class Tiquete {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getPrioridad() {
-        return prioridad;
-    }
-
-    public void setPrioridad(String prioridad) {
-        this.prioridad = prioridad;
-    }
-    
-    
 }
