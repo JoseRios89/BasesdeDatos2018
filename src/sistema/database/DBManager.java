@@ -278,7 +278,7 @@ public class DBManager {
     private List<String> obtenerValoresDeAtributos(Object objeto) {
         List<String> atributos = this.obtenerNombresDeAtributos(objeto);
         List<String> valores = new ArrayList<>();
-        
+        System.out.println(atributos);
         try {
             for (int contador = 0; contador < atributos.size(); contador++) {
                 String nombreMetodo = "get" + StringUtils.capitalize(atributos.get(contador).replace("'", ""));

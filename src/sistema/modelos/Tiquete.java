@@ -10,9 +10,6 @@ tiquete (titulo, descripcion, fecha_creacion, fecha_solucion)
  */
 package sistema.modelos;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  *
  * @author jramos
@@ -20,7 +17,6 @@ import java.util.Date;
 public class Tiquete {
 
     private String codigoTiquete;
-
     private String fechaCreacion;
     private String fechaSolucion;
     private String descripcion;
@@ -28,12 +24,11 @@ public class Tiquete {
     private String estado;
     private String codigoCliente;
     private String titulo;
-
-    private String categorias;
+    private String categoria;
     private String tipo;
     private String prioridad;
 
-    public Tiquete(String codigoTiquete, String fechaCreacion, String fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo,String categorias, String tipo, String prioridad) {
+    public Tiquete(String codigoTiquete, String fechaCreacion, String fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo, String categoria, String tipo, String prioridad) {
         this.codigoTiquete = codigoTiquete;
         this.fechaCreacion = fechaCreacion;
         this.fechaSolucion = fechaSolucion;
@@ -41,6 +36,7 @@ public class Tiquete {
         this.solucion = solucion;
         this.estado = estado;
         this.codigoCliente = codigoCliente;
+        this.categoria = categoria;
         this.titulo = titulo;
         this.tipo = tipo;
         this.prioridad = prioridad;
@@ -110,12 +106,12 @@ public class Tiquete {
         this.titulo = titulo;
     }
 
-    public String getCategorias() {
-        return categorias;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCategorias(String categorias) {
-        this.categorias = categorias;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getTipo() {
@@ -133,6 +129,4 @@ public class Tiquete {
     public void setPrioridad(String prioridad) {
         this.prioridad = prioridad;
     }
-
-
 }

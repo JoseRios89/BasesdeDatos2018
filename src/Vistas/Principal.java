@@ -434,15 +434,28 @@ public class Principal extends javax.swing.JFrame {
         Date fecha = new Date();
         Tiquete tiquete;
         Cliente cliente  = new Cliente("C1", "Daniel", "Solano");
-        
-
-        manager.salvarObjeto(cliente);
+                
+        manager.salvarObjeto(cliente); // Esto es un ejemplo. Se debe de usar el cliente que se logueo. NOTA: Solo crear el cliente una vez, o sino el DB va a fallar, porque el cliente ya va a existir.
         DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-        tiquete = new Tiquete("T1",dateformat.format(fecha),dateformat.format(fecha),txt_descripcion.getText(),
-        "Pendiente","Ingresada",cliente.getCodigoCliente(),txt_titulo.getText(),(String )cb_categoria.getSelectedItem(),(String )cb_tipo.getSelectedItem(),(String)cb_urgencia.getSelectedItem());
+        
+        // Obtener datos de los inputs.
+        String codigoTiquete = "T2"; // Este codigo debería de generarse de alguna manera.
+        String fechaCreacion = dateformat.format(fecha);
+        String fechaSolucion = dateformat.format(fecha);
+        String descripcion = txt_descripcion.getText();
+        String solucion = "Pendiente"; // Este texto debería de guardarse por el empleado.
+        String estado = "Ingresada"; // Cuando se crea por primera vez es "Ingresada", cuando se marca como solucionada por el empleado deberia de ser "Solucionada"
+        String codigoCliente = cliente.getCodigoCliente();
+        String titulo = txt_titulo.getText();
+        String categoria = (String ) cb_categoria.getSelectedItem();
+        String tipo = (String ) cb_tipo.getSelectedItem();
+        String prioridad = (String) cb_urgencia.getSelectedItem();
+
+        // Asignar el tiquete
+        tiquete = new Tiquete(codigoTiquete, fechaCreacion, fechaSolucion, descripcion,
+        solucion, estado, codigoCliente, titulo, categoria, tipo, prioridad);
+        // Crear el tiquete.
         manager.salvarObjeto(tiquete);
- 
-        //manager.salvarObjeto(incidencia);
     }//GEN-LAST:event_btn_enviarMensajeActionPerformed
 
     private void cb_urgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_urgenciaActionPerformed
