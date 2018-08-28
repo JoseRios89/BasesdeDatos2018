@@ -265,6 +265,11 @@ public class Principal extends javax.swing.JFrame {
         ));
         jTable1.setGridColor(new java.awt.Color(153, 0, 51));
         jTable1.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -329,6 +334,11 @@ public class Principal extends javax.swing.JFrame {
         }
         tablaIncidencias.setModel(tableModel);
         tablaIncidencias.setGridColor(new java.awt.Color(153, 0, 51));
+        tablaIncidencias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaIncidenciasMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tablaIncidencias);
 
         cb_incidencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -610,7 +620,18 @@ public class Principal extends javax.swing.JFrame {
             
             
             
+            /*
             
+            1) Crear el boton, y que reciba un objeto.
+            2) Detectar el row seleccionado.
+            3) Obtener el objeto del row seleccionado
+            4) User el manager para destruir el objeto.
+               DBManager manager = DBManager.getInstance();
+               manager.destruirObjet(objeto);
+            5) Actualizar la tabla
+               - Volver a pedir los datos desde la BD.
+               - Simplemente quitar la fila de la tabla.
+            */
             
         
         
@@ -620,6 +641,14 @@ public class Principal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btn_crearDepartamentoActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        System.out.println(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void tablaIncidenciasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaIncidenciasMouseClicked
+        System.out.println(evt);      // TODO add your handling code here:
+    }//GEN-LAST:event_tablaIncidenciasMouseClicked
 
     /**
      * @param args the command line arguments
