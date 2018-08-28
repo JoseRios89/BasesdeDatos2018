@@ -20,6 +20,10 @@ public class Area {
         this.nombre = nombre;
     }
 
+    public Area() {
+
+    }
+
     /* GETTERS */
     public String getNombre() {
         return nombre;
