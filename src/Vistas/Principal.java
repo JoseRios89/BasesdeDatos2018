@@ -6,6 +6,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import sistema.modelos.Incidencia;
 import sistema.database.DBConnector;
 import sistema.database.DBManager;
@@ -299,17 +301,33 @@ public class Principal extends javax.swing.JFrame {
 
         tablaIncidencias.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 51), 2));
         tablaIncidencias.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        tablaIncidencias.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Título", "Estado", "Prioridad", "Solicitante", "Asignada a A", "Categoria", "Fecha"
-            }
-        ));
+        DBManager manager = DBManager.getInstance();
+        List<Object> listaTiquetes = manager.obtenerLista("Tiquete");
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("Codito Tiquete");
+        tableModel.addColumn("Titulo");
+        tableModel.addColumn("Estado");
+        tableModel.addColumn("Prioridad");
+        tableModel.addColumn("Codigo Cliente");
+        tableModel.addColumn("Tipo");
+        tableModel.addColumn("Categoria");
+        tableModel.addColumn("Fecha Creacion");
+
+        for(int index = 0; index < listaTiquetes.size(); index++) {
+            Tiquete tiquete = (Tiquete) listaTiquetes.get(index);
+            Object[] row = new String[]{
+                Integer.toString(tiquete.getCodigoTiquete()),
+                tiquete.getTitulo(),
+                tiquete.getEstado(),
+                tiquete.getPrioridad(),
+                Integer.toString(tiquete.getCodigoCliente()),
+                tiquete.getTipo(),
+                tiquete.getCategoria(),
+                tiquete.getFechaCreacion().toString()
+            };
+            tableModel.addRow(row);
+        }
+        tablaIncidencias.setModel(tableModel);
         tablaIncidencias.setGridColor(new java.awt.Color(153, 0, 51));
         jScrollPane3.setViewportView(tablaIncidencias);
 
@@ -346,8 +364,8 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(cb_incidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnBuscar))
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Estado de Incidencia", jPanel5);

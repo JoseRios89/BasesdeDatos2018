@@ -10,6 +10,8 @@ tiquete (titulo, descripcion, fecha_creacion, fecha_solucion)
  */
 package sistema.modelos;
 
+import static java.lang.Integer.parseInt;
+
 /**
  *
  * @author jramos
@@ -102,6 +104,10 @@ public class Tiquete {
 
     public void setCodigoCliente(int codigoCliente) {
         this.codigoCliente = codigoCliente;
+    }
+    
+    public void setCodigoCliente(String codigoCliente) {
+        this.codigoCliente = parseInt(codigoCliente);
     }
 
     public String getTitulo() {
