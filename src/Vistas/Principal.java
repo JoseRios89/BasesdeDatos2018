@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import sistema.modelos.Incidencia;
@@ -19,6 +20,8 @@ import sistema.modelos.Tiquete;
 
 public class Principal extends javax.swing.JFrame {
 
+    DefaultTableModel tableModel;
+    
     public Principal() {
         initComponents();
     }
@@ -61,6 +64,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaIncidencias = new javax.swing.JTable();
         cb_incidencia = new javax.swing.JComboBox<>();
+        btn_eliminar = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -348,20 +352,29 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btn_eliminar.setText("Eliminar");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(276, 276, 276)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(82, 82, 82)
-                        .addComponent(cb_incidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(370, 370, 370)
-                        .addComponent(btnBuscar)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_eliminar)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addGap(82, 82, 82)
+                            .addComponent(cb_incidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(370, 370, 370)
+                            .addComponent(btnBuscar))))
                 .addContainerGap(471, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -375,7 +388,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(btnBuscar))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(btn_eliminar)
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Estado de Incidencia", jPanel5);
@@ -650,6 +665,30 @@ public class Principal extends javax.swing.JFrame {
         System.out.println(evt);      // TODO add your handling code here:
     }//GEN-LAST:event_tablaIncidenciasMouseClicked
 
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        Tiquete tiquete;
+        int seleccion = tablaIncidencias.getSelectedRow();
+        if (seleccion >= 0) {
+        int codigoTiquete = Integer.parseInt(tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 1).toString());
+        String titulo = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 2);
+        String estado = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 3);
+        String prioridad = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 4);
+        int codigoCliente = Integer.parseInt(tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 5).toString());
+        String tipo = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 6);
+        String categoria = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 7);
+        int fechaCreacion = Integer.parseInt(tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 8).toString());
+        
+//        tiquete = new Tiquete(codigoTiquete, fechaCreacion, fechaSolucion, descripcion,
+//        solucion, estado, codigoCliente, titulo, categoria, tipo, prioridad);
+        
+        DBManager manager = DBManager.getInstance();
+//               manager.destruirObjeto(tiquete);
+            tableModel.removeRow(seleccion);
+        } else if (seleccion == 0) {
+            JOptionPane.showMessageDialog(null, "No hay más filas para eliminar.");
+        }
+    }//GEN-LAST:event_btn_eliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -691,6 +730,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar btnAcercaDe;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btn_crearDepartamento;
+    private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton btn_enviarMensaje;
     private javax.swing.JComboBox<String> cb_categoria;
     private javax.swing.JComboBox<String> cb_incidencia;
