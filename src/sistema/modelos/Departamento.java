@@ -21,6 +21,7 @@ public class Departamento {
         this.codigoArea = codigoArea;
         this.nombre = nombre;
     }
+    public Departamento() {}
 
     /* GETTERS */
     public String getNombre() {

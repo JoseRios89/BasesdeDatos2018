@@ -14,6 +14,8 @@ import java.lang.reflect.Method;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sistema.modelos.Area;
 import sistema.scripts.DBScripts;
 
@@ -204,40 +206,55 @@ public class DBManager {
         }
     }
         
-    // Cambiar el tipo de retorno del metodo al hacer el llamado a la BD.
-    //public List<Object> obtenerLista(String nombreClase) {
+    //  COMO USAR ESTE METODO
+    //  DBManager manager = DBManager.getInstance();
+    //  ArrayList<Object> listaAreas = manager.obtenerLista("Area");
+    //    for(int index = 0; index < listaAreas.size(); index++) {
+    //        // El objeto que se instancia, debe de ser del mismo tipo del nombre de clase que trata de obtener
+    //        Area area = (Area) listaAreas.get(index);
+    //        // Aquí se agarran los valores y se despliegan en la vista.
+    //        // Por ejemplo:
+    //        //
+    //        // input_text.setText(area.getNombre());
+    //        //
+    //        // Así consecutivamente con los demas campos.
+    //    }
+    //
     public ArrayList<Object> obtenerLista(String nombreClase) {
         ArrayList<Object> listaDeResultados = new ArrayList<>();
         String nombreTabla = new StringBuilder().append("tbl_").
           append(nombreClase.toLowerCase()).toString();
         StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM ").append(nombreTabla);
-        
 
         String className = "sistema.modelos." + StringUtils.capitalize(nombreClase);
-
+        Class klass = null;
+        List<String> atributos = null;
         try {
-            Class klass = Class.forName(className);
-            List<String> atributos = this.obtenerNombresDeAtributos(klass);
+            klass = Class.forName(className);
+            atributos = this.obtenerNombresDeAtributos(klass);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String ordenColumnas = this.lineaDesdeArray(atributos);
 
-            // Inicio ==> Obtener datos, en el mismo orden que el constructor del objeto.
-            String ordenColumnas = this.lineaDesdeArray(atributos);
-            query.append(" ORDER BY ").append(ordenColumnas).append(";");
-            // Fin    ==> Obtener datos, en el mismo orden que el constructor del objeto.
-
+        query.append("SELECT ").append(ordenColumnas).append(" FROM ").append(nombreTabla);
+        query.append(" ORDER BY ").append(ordenColumnas).append(";");
+        System.out.println(query.toString());
+        
+        try {
             ResultSet resultados = connector.getConnection().prepareCall(query.toString()).executeQuery();
+            
             while(resultados.next()) {
                 try {
                     Constructor<?> constructor = klass.getConstructor();
                     Object objeto = constructor.newInstance();
 
-                    for (int index = 1; index < atributos.size(); index++) {
+                    for (int index = 0; index < atributos.size(); index++) {
                         String nombreMetodo = "set" + StringUtils.capitalize(atributos.get(index).replace("'", ""));
                         Method metodo = objeto.getClass().getDeclaredMethod(nombreMetodo, String.class);
-                        metodo.invoke(objeto, resultados.getString(index));
+                        metodo.invoke(objeto, resultados.getString(atributos.get(index).toString()));
                     }
-                    Area area = (Area) objeto;
-                    System.out.println(area.getNombre());
                     listaDeResultados.add(objeto);
                 } catch (Exception ex) {
                     System.out.println("=== DBManager:ObtenerLista::WhileLoop ===> " + ex);
@@ -245,8 +262,6 @@ public class DBManager {
            }
         } catch (SQLException ex) {
             System.out.println("=== DBManager:ObtenerLista::SQLException ===> " + ex);
-        } catch (ClassNotFoundException ex) {
-            System.out.println("=== DBManager:ObtenerLista::ClassNotFoundException ===> " + ex);
         }
 
         return listaDeResultados;
@@ -289,6 +304,7 @@ public class DBManager {
     private List<String> obtenerValoresDeAtributos(Object objeto) {
         List<String> atributos = this.obtenerNombresDeAtributos(objeto);
         List<String> valores = new ArrayList<>();
+
         try {
             for (int contador = 0; contador < atributos.size(); contador++) {
                 String nombreMetodo = "get" + StringUtils.capitalize(atributos.get(contador).replace("'", ""));

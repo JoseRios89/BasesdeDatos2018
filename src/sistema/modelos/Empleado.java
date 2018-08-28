@@ -25,6 +25,7 @@ public class Empleado {
         this.username = username;
         this.password = password;
     }
+    public Empleado() {}
 
     public String getUsername() {
         return username;

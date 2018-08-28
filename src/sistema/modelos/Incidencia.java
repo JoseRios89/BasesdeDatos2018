@@ -34,9 +34,7 @@ public class Incidencia {
         this.titulo = titulo;
     }
 
-    public Incidencia() {
-        
-    }
+    public Incidencia() {}
 
     public int getCodigoIncidencia() {
         return codigoIncidencia;

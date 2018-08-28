@@ -19,6 +19,7 @@ public class Area {
         this.codigoArea = codigoArea;
         this.nombre = nombre;
     }
+    public Area() {}
 
     /* GETTERS */
     public String getNombre() {

@@ -16,6 +16,7 @@ public class Login {
         this.username = username;
         this.fechaIngreso = this.parseFechaIngreso(fechaIngreso);
     }
+    public Login() {}
 
     public int getCodigoLogin() {
         return codigoLogin;

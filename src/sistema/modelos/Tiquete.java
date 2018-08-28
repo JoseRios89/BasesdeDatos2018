@@ -42,6 +42,7 @@ public class Tiquete {
         this.tipo = tipo;
         this.prioridad = prioridad;
     }
+    public Tiquete() {}
 
     public int getCodigoTiquete() {
         return codigoTiquete;

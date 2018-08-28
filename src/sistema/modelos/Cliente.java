@@ -23,6 +23,7 @@ public class Cliente {
         this.username = username;
         this.password = password;
     }
+    public Cliente() {}
 
     public String getUsername() {
         return username;
