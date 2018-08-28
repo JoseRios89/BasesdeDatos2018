@@ -20,7 +20,7 @@ import sistema.modelos.Tiquete;
 
 public class Principal extends javax.swing.JFrame {
 
-    DefaultTableModel tableModel;
+    public static DefaultTableModel tableModelIncidencias = new DefaultTableModel();
     
     public Principal() {
         initComponents();
@@ -29,7 +29,6 @@ public class Principal extends javax.swing.JFrame {
     Incidencia incidencia = new Incidencia();
 
     DBConnector control = new DBConnector();
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -312,15 +311,14 @@ public class Principal extends javax.swing.JFrame {
         tablaIncidencias.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         DBManager manager = DBManager.getInstance();
         List<Object> listaTiquetes = manager.obtenerLista("Tiquete");
-        DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.addColumn("Codito Tiquete");
-        tableModel.addColumn("Titulo");
-        tableModel.addColumn("Estado");
-        tableModel.addColumn("Prioridad");
-        tableModel.addColumn("Codigo Cliente");
-        tableModel.addColumn("Tipo");
-        tableModel.addColumn("Categoria");
-        tableModel.addColumn("Fecha Creacion");
+        tableModelIncidencias.addColumn("Codito Tiquete");
+        tableModelIncidencias.addColumn("Titulo");
+        tableModelIncidencias.addColumn("Estado");
+        tableModelIncidencias.addColumn("Prioridad");
+        tableModelIncidencias.addColumn("Codigo Cliente");
+        tableModelIncidencias.addColumn("Tipo");
+        tableModelIncidencias.addColumn("Categoria");
+        tableModelIncidencias.addColumn("Fecha Creacion");
 
         for(int index = 0; index < listaTiquetes.size(); index++) {
             Tiquete tiquete = (Tiquete) listaTiquetes.get(index);
@@ -334,9 +332,9 @@ public class Principal extends javax.swing.JFrame {
                 tiquete.getCategoria(),
                 tiquete.getFechaCreacion().toString()
             };
-            tableModel.addRow(row);
+            tableModelIncidencias.addRow(row);
         }
-        tablaIncidencias.setModel(tableModel);
+        tablaIncidencias.setModel(tableModelIncidencias);
         tablaIncidencias.setGridColor(new java.awt.Color(153, 0, 51));
         tablaIncidencias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -666,24 +664,16 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaIncidenciasMouseClicked
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-        Tiquete tiquete;
+        Tiquete tiquete = new Tiquete();
         int seleccion = tablaIncidencias.getSelectedRow();
+        
         if (seleccion >= 0) {
-        int codigoTiquete = Integer.parseInt(tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 1).toString());
-        String titulo = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 2);
-        String estado = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 3);
-        String prioridad = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 4);
-        int codigoCliente = Integer.parseInt(tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 5).toString());
-        String tipo = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 6);
-        String categoria = (String) tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 7);
-        int fechaCreacion = Integer.parseInt(tableModel.getValueAt(tablaIncidencias.getSelectedRow(), 8).toString());
+            int codigoTiquete = Integer.parseInt(tableModelIncidencias.getValueAt(tablaIncidencias.getSelectedRow(), 0).toString());
+            tiquete.setCodigoTiquete(codigoTiquete);
         
-//        tiquete = new Tiquete(codigoTiquete, fechaCreacion, fechaSolucion, descripcion,
-//        solucion, estado, codigoCliente, titulo, categoria, tipo, prioridad);
-        
-        DBManager manager = DBManager.getInstance();
-//               manager.destruirObjeto(tiquete);
-            tableModel.removeRow(seleccion);
+            DBManager manager = DBManager.getInstance();
+            tableModelIncidencias.removeRow(seleccion);
+            manager.destruirObjeto(tiquete);
         } else if (seleccion == 0) {
             JOptionPane.showMessageDialog(null, "No hay más filas para eliminar.");
         }
