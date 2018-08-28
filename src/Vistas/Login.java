@@ -192,8 +192,6 @@ public class Login extends javax.swing.JFrame {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
 
-        Registro registro = new Registro();
-        registro.setVisible(true);
         
         
     }//GEN-LAST:event_btnRegistroActionPerformed

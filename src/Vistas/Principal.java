@@ -57,7 +57,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaIncidencias = new javax.swing.JTable();
         cb_incidencia = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel6 = new javax.swing.JPanel();
@@ -297,9 +297,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 51), 2));
-        jTable2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaIncidencias.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 51), 2));
+        tablaIncidencias.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tablaIncidencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -310,8 +310,8 @@ public class Principal extends javax.swing.JFrame {
                 "ID", "Título", "Estado", "Prioridad", "Solicitante", "Asignada a A", "Categoria", "Fecha"
             }
         ));
-        jTable2.setGridColor(new java.awt.Color(153, 0, 51));
-        jScrollPane3.setViewportView(jTable2);
+        tablaIncidencias.setGridColor(new java.awt.Color(153, 0, 51));
+        jScrollPane3.setViewportView(tablaIncidencias);
 
         cb_incidencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cb_incidencia.addActionListener(new java.awt.event.ActionListener() {
@@ -359,7 +359,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel6.setText("Ingrese los datos");
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel11.setText("Departamentp");
+        jLabel11.setText("Departamento");
 
         btn_crearDepartamento.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btn_crearDepartamento.setText("Crear Departamento");
@@ -677,7 +677,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tablaIncidencias;
     private javax.swing.JTextField txt_area;
     private javax.swing.JTextField txt_departamento;
     private javax.swing.JTextArea txt_descripcion;
