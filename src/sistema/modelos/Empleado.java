@@ -12,14 +12,34 @@ package sistema.modelos;
 public class Empleado {
     private String nombre;
     private String apellido;
-    private String codigoEmpleado;
-    private String codigoDepartamento;
+    private int codigoEmpleado;
+    private int codigoDepartamento;
+    private String username;
+    private String password;
 
-    public Empleado(String nombre, String apellido, String codigoEmpleado, String codigoDepartamento) {
+    public Empleado(String nombre, String apellido, int codigoEmpleado, int codigoDepartamento, String username, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.codigoEmpleado = codigoEmpleado;
         this.codigoDepartamento = codigoDepartamento;
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNombre() {
@@ -38,19 +58,23 @@ public class Empleado {
         this.apellido = apellido;
     }
 
-    public String getCodigoEmpleado() {
+    public int getCodigoEmpleado() {
         return codigoEmpleado;
     }
 
-    public void setCodigoEmpleado(String codigoEmpleado) {
+    public void setCodigoEmpleado(int codigoEmpleado) {
         this.codigoEmpleado = codigoEmpleado;
     }
+    
+    public void setCodigoEmpleado(String codigoEmpleado) {
+        this.codigoEmpleado = Integer.parseInt(codigoEmpleado);
+    }
 
-    public String getCodigoDepartamento() {
+    public int getCodigoDepartamento() {
         return codigoDepartamento;
     }
 
-    public void setCodigoDepartamento(String codigoDepartamento) {
+    public void setCodigoDepartamento(int codigoDepartamento) {
         this.codigoDepartamento = codigoDepartamento;
     }    
 }

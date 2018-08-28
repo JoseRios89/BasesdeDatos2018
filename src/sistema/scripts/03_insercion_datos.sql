@@ -5,11 +5,8 @@
  */
 /**
  * Author:  jramos
- * Created: Aug 26, 2018
+ * Created: Aug 27, 2018
  */
 
-ALTER TABLE tbl_tiquete
-ADD COLUMN titulo VARCHAR(30),
-ADD COLUMN categoria VARCHAR(30),
-ADD COLUMN tipo VARCHAR(30),
-ADD COLUMN prioridad VARCHAR(30);
+INSERT INTO tbl_area (nombre, codigoArea) VALUES ();
+INSERT INTO tbl_cliente (codigoCliente, nombre, apellido, username, password) VALUES ();

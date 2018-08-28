@@ -16,19 +16,20 @@ package sistema.modelos;
  */
 public class Tiquete {
 
-    private String codigoTiquete;
+    private int codigoTiquete;
     private String fechaCreacion;
     private String fechaSolucion;
     private String descripcion;
     private String solucion;
     private String estado;
-    private String codigoCliente;
+    private int codigoCliente;
     private String titulo;
     private String categoria;
     private String tipo;
     private String prioridad;
 
-    public Tiquete(String codigoTiquete, String fechaCreacion, String fechaSolucion, String descripcion, String solucion, String estado, String codigoCliente, String titulo, String categoria, String tipo, String prioridad) {
+    public Tiquete(int codigoTiquete, String fechaCreacion, String fechaSolucion, String descripcion,
+        String solucion, String estado, int codigoCliente, String titulo, String categoria, String tipo, String prioridad) {
         this.codigoTiquete = codigoTiquete;
         this.fechaCreacion = fechaCreacion;
         this.fechaSolucion = fechaSolucion;
@@ -42,12 +43,16 @@ public class Tiquete {
         this.prioridad = prioridad;
     }
 
-    public String getCodigoTiquete() {
+    public int getCodigoTiquete() {
         return codigoTiquete;
     }
 
-    public void setCodigoTiquete(String codigoTiquete) {
+    public void setCodigoTiquete(int codigoTiquete) {
         this.codigoTiquete = codigoTiquete;
+    }
+    
+    public void setCodigoTiquete(String codigoTiquete) {
+        this.codigoTiquete = Integer.parseInt(codigoTiquete);
     }
 
     public String getFechaCreacion() {
@@ -90,11 +95,11 @@ public class Tiquete {
         this.estado = estado;
     }
 
-    public String getCodigoCliente() {
+    public int getCodigoCliente() {
         return codigoCliente;
     }
 
-    public void setCodigoCliente(String codigoCliente) {
+    public void setCodigoCliente(int codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
 

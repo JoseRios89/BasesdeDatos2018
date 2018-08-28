@@ -5,24 +5,22 @@
  */
 package sistema.modelos;
 
-import javax.swing.JComboBox;
-
 /**
  *
  * @author jramos
  */
 public class Incidencia {
-    private String codigoIncidencia;
+    private int codigoIncidencia;
     private String descripcion;
     private int precioUnitario;
-    private String codigoTiquete;
+    private int codigoTiquete;
     private String tipo;
     private String categoria;
     private String urgencia;
     private String seguimiento;
     private String titulo;
 
-    public Incidencia(String codigoIncidencia, String descripcion, int precioUnitario, String codigoTiquete,
+    public Incidencia(int codigoIncidencia, String descripcion, int precioUnitario, int codigoTiquete,
     String tipo, String categoria, String urgencia, String seguimiento,String titulo) {
         
         this.codigoIncidencia = codigoIncidencia;
@@ -40,12 +38,16 @@ public class Incidencia {
         
     }
 
-    public String getCodigoIncidencia() {
+    public int getCodigoIncidencia() {
         return codigoIncidencia;
     }
 
-    public void setCodigoIncidencia(String codigoIncidencia) {
+    public void setCodigoIncidencia(int codigoIncidencia) {
         this.codigoIncidencia = codigoIncidencia;
+    }
+    
+    public void setCodigoIncidencia(String codigoIncidencia) {
+        this.codigoIncidencia = Integer.parseInt(codigoIncidencia);
     }
 
     public String getDescripcion() {
@@ -64,11 +66,11 @@ public class Incidencia {
         this.precioUnitario = precioUnitario;
     }
 
-    public String getCodigoTiquete() {
+    public int getCodigoTiquete() {
         return codigoTiquete;
     }
 
-    public void setCodigoTiquete(String codigoTiquete) {
+    public void setCodigoTiquete(int codigoTiquete) {
         this.codigoTiquete = codigoTiquete;
     }
     public String getTipo() {
@@ -109,8 +111,5 @@ public class Incidencia {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }  
-
- 
-    
+    }    
 }

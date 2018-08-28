@@ -11,12 +11,11 @@ package sistema.modelos;
  */
 public class Area {
     /* VARIABLES */
+    private int codigoArea;
     private String nombre;
-    private String codigoArea;
-
 
     /* CONSTRUCTOR */
-    public Area(String codigoArea, String nombre) {
+    public Area(int codigoArea, String nombre) {
         this.codigoArea = codigoArea;
         this.nombre = nombre;
     }
@@ -26,7 +25,7 @@ public class Area {
         return nombre;
     }
     
-    public String getCodigoArea() {
+    public int getCodigoArea() {
         return codigoArea;
     }
 
@@ -36,6 +35,10 @@ public class Area {
     }
     
     public void setCodigoArea(String codigoArea) {
+        this.codigoArea = Integer.parseInt(codigoArea);
+    }
+    
+    public void setCodigoArea(int codigoArea) {
         this.codigoArea = codigoArea;
     }
 }

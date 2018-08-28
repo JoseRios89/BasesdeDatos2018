@@ -108,8 +108,19 @@ public class DBManager {
                     query.append(linea).append("\n");
                 }
             }
-            connector.executeUpdate(query.toString());
-            isScriptExecuted = true;
+
+            PreparedStatement statement;
+            
+            try {
+                statement = connector.getConnection().prepareCall(query.toString());
+                statement.executeUpdate();
+                isScriptExecuted = true;
+            } catch (SQLException ex) {
+                System.err.println("=== DBManager:CreateTables:PreparedStatement:Exception ===> " + ex);
+                isScriptExecuted = false;
+            }
+            
+            
         } catch (IOException e) {
             System.err.println("=== DBManager:CreateTables::Exception ===> " + e);
         }
@@ -278,12 +289,11 @@ public class DBManager {
     private List<String> obtenerValoresDeAtributos(Object objeto) {
         List<String> atributos = this.obtenerNombresDeAtributos(objeto);
         List<String> valores = new ArrayList<>();
-        System.out.println(atributos);
         try {
             for (int contador = 0; contador < atributos.size(); contador++) {
                 String nombreMetodo = "get" + StringUtils.capitalize(atributos.get(contador).replace("'", ""));
                 Method metodo = objeto.getClass().getMethod(nombreMetodo);
-                String valorMetodo = "\"" + metodo.invoke(objeto).toString() + "\"";
+                String valorMetodo = "\"" + metodo.invoke(objeto).toString() + "\"";                
                 valores.add(valorMetodo);
             }
         }

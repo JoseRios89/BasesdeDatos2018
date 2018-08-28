@@ -10,7 +10,6 @@ import sistema.modelos.Incidencia;
 import sistema.database.DBConnector;
 import sistema.database.DBManager;
 import sistema.modelos.Cliente;
-import sistema.modelos.Credenciales;
 import sistema.modelos.Tiquete;
 
 
@@ -22,7 +21,6 @@ public class Principal extends javax.swing.JFrame {
 
     Incidencia incidencia = new Incidencia();
     DBConnector control = new DBConnector();
-    Credenciales credenciales = new Credenciales();
 
 
     @SuppressWarnings("unchecked")
@@ -397,7 +395,7 @@ public class Principal extends javax.swing.JFrame {
 
     private Incidencia crearIncidencia() {
         Incidencia incidencia = new Incidencia();
-        incidencia.setCodigoIncidencia(txt_titulo.getText());
+        incidencia.setCodigoIncidencia(0);
 
         List<Incidencia> listaIncidencia = null;
         listaIncidencia.add(incidencia);
@@ -409,14 +407,14 @@ public class Principal extends javax.swing.JFrame {
         DBManager manager = DBManager.getInstance();
         //List<Cliente> listaClientes = manager.obtenerLista("Cliente");
         // Vaidar que exista un cliente que tiene los datos ingresados.
-        Cliente cliente1 = new Cliente("Jesus", "Ramos", "C1");
-        Cliente cliente2 = new Cliente("Daniel", "Solano", "C2");
+        Cliente cliente1 = new Cliente(1, "Jesus", "Ramos", "jramos", "1234");
+        Cliente cliente2  = new Cliente(2, "Daniel", "Solano", "dsolano", "1234");
         List<Cliente> listaClientes = null;
         listaClientes.add(cliente1);
         listaClientes.add(cliente2);
         for (int i = 0; i <= listaClientes.size(); i++) {
             Cliente cliente = listaClientes.get(i);
-            if (cliente.getCodigoCliente() == "C1") {
+            if (cliente.getCodigoCliente() == cliente1.getCodigoCliente()) {
                 // ingresaPrincipal();
             } else {
                 // Mostrar ventana de error.
@@ -433,19 +431,19 @@ public class Principal extends javax.swing.JFrame {
         DBManager manager = DBManager.getInstance();
         Date fecha = new Date();
         Tiquete tiquete;
-        Cliente cliente  = new Cliente("C1", "Daniel", "Solano");
+        Cliente cliente  = new Cliente(1, "Daniel", "Solano", "dsolano", "1234");
                 
-        manager.salvarObjeto(cliente); // Esto es un ejemplo. Se debe de usar el cliente que se logueo. NOTA: Solo crear el cliente una vez, o sino el DB va a fallar, porque el cliente ya va a existir.
+//        manager.salvarObjeto(cliente); // Esto es un ejemplo. Se debe de usar el cliente que se logueo. NOTA: Solo crear el cliente una vez, o sino el DB va a fallar, porque el cliente ya va a existir.
         DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
         
         // Obtener datos de los inputs.
-        String codigoTiquete = "T2"; // Este codigo debería de generarse de alguna manera.
+        int codigoTiquete = 0; // Este codigo debería de generarse de alguna manera.
         String fechaCreacion = dateformat.format(fecha);
         String fechaSolucion = dateformat.format(fecha);
         String descripcion = txt_descripcion.getText();
         String solucion = "Pendiente"; // Este texto debería de guardarse por el empleado.
         String estado = "Ingresada"; // Cuando se crea por primera vez es "Ingresada", cuando se marca como solucionada por el empleado deberia de ser "Solucionada"
-        String codigoCliente = cliente.getCodigoCliente();
+        int codigoCliente = cliente.getCodigoCliente();
         String titulo = txt_titulo.getText();
         String categoria = (String ) cb_categoria.getSelectedItem();
         String tipo = (String ) cb_tipo.getSelectedItem();

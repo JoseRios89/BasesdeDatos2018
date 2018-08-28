@@ -12,11 +12,11 @@ package sistema.modelos;
 public class Departamento {
     /* VARIABLES */
     private String nombre;
-    private String codigoDepartamento;
-    private String codigoArea;
+    private int codigoDepartamento;
+    private int codigoArea;
 
     /* CONSTRUCTOR */
-    public Departamento(String codigoDepartamento, String nombre, String codigoArea) {
+    public Departamento(int codigoDepartamento, String nombre, int codigoArea) {
         this.codigoDepartamento = codigoDepartamento;
         this.codigoArea = codigoArea;
         this.nombre = nombre;
@@ -27,24 +27,28 @@ public class Departamento {
         return nombre;
     }
     
-    public String getCodigoDepartamento() {
+    public int getCodigoDepartamento() {
         return codigoDepartamento;
+    }
+
+    public void setCodigoDepartamento(int codigoDepartamento) {
+        this.codigoDepartamento = codigoDepartamento;
+    }
+        
+    public void setCodigoDepartamento(String codigoDepartamento) {
+        this.codigoDepartamento = Integer.parseInt(codigoDepartamento);
     }
 
     /* SETTERS */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    public void setCodigoDepartamento(String codigoDepartamento) {
-        this.codigoDepartamento = codigoDepartamento;
-    }
 
-    public String getCodigoArea() {
+    public int getCodigoArea() {
         return codigoArea;
     }
 
-    public void setCodigoArea(String codigoArea) {
+    public void setCodigoArea(int codigoArea) {
         this.codigoArea = codigoArea;
     }
 }
